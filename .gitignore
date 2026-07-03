@@ -1,0 +1,12 @@
+# Terraform State (enthält sensible Daten)
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate*
+
+# Terraform Provider (grosse Binärdateien)
+.terraform/
+.terraform.lock.hcl
+
+# Patch-Files (temporär)
+patch.json
+patch-pv.json

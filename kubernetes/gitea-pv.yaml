@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gitea-shared-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard-rwx
+  csi:
+    driver: filestore.csi.storage.gke.io
+    volumeHandle: "modeInstance/europe-west1-b/gitea-filestore/gitea_data"
+    volumeAttributes:
+      ip: "10.204.242.194"
+      volume: "gitea_data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitea-shared-storage
+  namespace: default
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: gitea
+    meta.helm.sh/release-namespace: default
+    helm.sh/resource-policy: keep
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: gitea-shared-pv
+  storageClassName: standard-rwx
+  resources:
+    requests:
+      storage: 10Gi
