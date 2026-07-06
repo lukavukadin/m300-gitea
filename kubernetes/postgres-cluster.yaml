@@ -31,4 +31,4 @@ metadata:
 type: kubernetes.io/basic-auth
 stringData:
   username: gitea
-  password: "GiteaM300Secure2026!"
+  password: "PLACEHOLDER"
