@@ -1,0 +1,39 @@
+name: Deploy Gitea to GKE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v3
+
+      - name: Bei GCP einloggen (Workload Identity)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/317129508741/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+          service_account: "github-actions@m300-gitea.iam.gserviceaccount.com"
+
+      - name: kubectl konfigurieren
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: gitea-cluster
+          location: europe-west1-b
+          project_id: m300-gitea
+
+      - name: Helm installieren
+        uses: azure/setup-helm@v3
+
+      - name: Gitea deployen
+        run: |
+          helm repo add gitea-charts https://dl.gitea.com/charts/
+          helm repo update
+          helm upgrade gitea gitea-charts/gitea -f kubernetes/gitea-values.yaml --namespace default --wait
