@@ -26,7 +26,7 @@ ingress:
 gitea:
   admin:
     username: "admin"
-    password: "GiteaAdmin2026!"
+    password: "PLACEHOLDER"
     email: "luka.vukadin7@gmail.com"
 
   config:
@@ -40,7 +40,7 @@ gitea:
       HOST: "gitea-postgres-rw:5432"
       NAME: "gitea"
       USER: "gitea"
-      PASSWD: "GiteaM300Secure2026!"
+      PASSWD: "PLACEHOLDER"
 
 persistence:
   enabled: true
