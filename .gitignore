@@ -10,3 +10,5 @@ terraform.tfstate.backup
 # Patch-Files (temporär)
 patch.json
 patch-pv.json
+
+github-actions-key.json
