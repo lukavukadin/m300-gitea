@@ -36,4 +36,8 @@ jobs:
         run: |
           helm repo add gitea-charts https://dl.gitea.com/charts/
           helm repo update
-          helm upgrade gitea gitea-charts/gitea -f kubernetes/gitea-values.yaml --namespace default --wait
+          helm upgrade gitea gitea-charts/gitea -f kubernetes/gitea-values.yaml \
+            --namespace default \
+            --set gitea.admin.password=${{ secrets.GITEA_ADMIN_PASSWORD }} \
+            --set gitea.config.database.PASSWD=${{ secrets.GITEA_DB_PASSWORD }} \
+            --wait
