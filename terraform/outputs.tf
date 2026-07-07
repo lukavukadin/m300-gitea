@@ -22,4 +22,4 @@ output "dns_nameservers" {
 output "filestore_ip" {
   description = "IP-Adresse des Filestores"
   value       = google_filestore_instance.gitea.networks[0].ip_addresses[0]
-}
+}7

@@ -13,6 +13,7 @@ ingress:
   className: "nginx"
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
   hosts:
     - host: git.lukavukadin.ch
       paths:
