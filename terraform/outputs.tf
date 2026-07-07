@@ -15,7 +15,7 @@ output "region" {
 }
 
 output "dns_nameservers" {
-  description = "Nameserver für lukavukadin.ch → beim Domain-Anbieter eintragen"
+  description = "Nameserver der Cloud DNS Zone für lukavukadin.ch"
   value       = google_dns_managed_zone.gitea.name_servers
 }
 
