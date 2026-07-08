@@ -22,6 +22,18 @@ spec:
     size: 5Gi
     storageClass: standard
 
+  serviceAccountTemplate:
+    metadata:
+      annotations:
+        iam.gke.io/gcp-service-account: cnpg-backup@m300-gitea.iam.gserviceaccount.com
+
+  backup:
+    barmanObjectStore:
+      destinationPath: gs://m300-gitea-postgres-backup
+      googleCredentials:
+        gkeEnvironment: true
+    retentionPolicy: "7d"
+
 ---
 apiVersion: v1
 kind: Secret
@@ -32,3 +44,15 @@ type: kubernetes.io/basic-auth
 stringData:
   username: gitea
   password: "PLACEHOLDER"
+
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: gitea-postgres-backup
+  namespace: default
+spec:
+  schedule: "0 2 * * *"
+  backupOwnerReference: self
+  cluster:
+    name: gitea-postgres
