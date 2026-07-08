@@ -8,7 +8,7 @@ für das Modul-300-Schulprojekt von Luka Vukadin.
 - **Cluster:** Google Kubernetes Engine (GKE)
 - **Applikation:** Gitea (selbst-gehosteter Git-Service)
 - **Domain:** https://git.lukavukadin.ch
-- **Projektvariante:** V2
+- **Projektdokumentation:** https://github.com/lukavukadin/m300
 
 ## Ordnerstruktur
 
